@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using BookReview.App.Abstractions;
-using Google.Apis.Books.v1;
-using Google.Apis.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace BookReview.App
@@ -13,12 +13,18 @@ namespace BookReview.App
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Please enter a topic");
+                Console.WriteLine("Please enter a topic (one word) as 1st argument");
+                return;
+            }
+            else if (args.Length == 1)
+            {
+                Console.WriteLine("Please enter a *.json to save to as 2nd argument");
                 return;
             }
 
             string searchTerm = args[0];
-            Console.WriteLine(searchTerm);
+            string filePath = args[1];
+            Console.WriteLine($"Searching for books in {searchTerm}");
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -27,16 +33,35 @@ namespace BookReview.App
                 .Build();
 
             string apiKey = config.GetSection("GoogleApiKey").Value;
+            var bookReviews = GetBookReviews(apiKey, searchTerm);
+            Console.WriteLine($"Writing to {filePath} the contents");
+            WriteToFile(filePath, bookReviews);
+            Console.WriteLine("Done writing");
+        }
 
+        private static List<BookReviewResult> GetBookReviews(string apiKey, string searchTerm)
+        {
+            var bookReviews = new List<BookReviewResult>();
             var books = BooksAbstraction.GetBooks(apiKey, searchTerm);
             foreach (var book in books)
             {
-                Console.WriteLine($"Book");
-                foreach (var prop in book.GetType().GetProperties())
+                bookReviews.Add(new BookReviewResult
                 {
-                    Console.WriteLine($"-{prop.Name}: {prop.GetValue(book)}");
-                }
+                    Book = book,
+                    Videos = VideosAbstraction.GetVideos(apiKey, book.Title)
+                });
             }
+
+            return bookReviews;
+        }
+
+        private static void WriteToFile(string file, List<BookReviewResult> results)
+        {
+            string json = JsonSerializer.Serialize(results, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+            File.WriteAllText(file, json);
         }
     }
 }

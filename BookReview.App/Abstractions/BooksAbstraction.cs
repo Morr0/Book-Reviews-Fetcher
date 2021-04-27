@@ -10,7 +10,7 @@ namespace BookReview.App.Abstractions
     {
         public static List<Book> GetBooks(string apiKey, string searchQuery)
         {
-            var booksService = new BooksService(new BaseClientService.Initializer
+            using var booksService = new BooksService(new BaseClientService.Initializer
             {
                 ApiKey = apiKey,
                 ApplicationName = "BookReview"
