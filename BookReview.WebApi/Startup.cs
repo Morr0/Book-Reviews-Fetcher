@@ -19,6 +19,14 @@ namespace BookReview.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(x =>
+            {
+                x.AddPolicy(x.DefaultPolicyName, policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +36,8 @@ namespace BookReview.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors();
             
             app.UseRouting();
 
