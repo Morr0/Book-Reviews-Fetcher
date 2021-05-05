@@ -36,7 +36,7 @@ namespace BookReview.App.Abstractions
                 book.Title = volume.VolumeInfo.Title;
                 book.Subtitle = volume.VolumeInfo.Subtitle;
                 book.Description = volume.VolumeInfo.Description;
-                book.Authors = new List<string>(volume.VolumeInfo.Authors);
+                book.Authors = volume.VolumeInfo.Authors is null ? new List<string>() : new List<string>(volume.VolumeInfo.Authors);
                 book.Published = volume.VolumeInfo.PublishedDate;
                 book.PageCount = volume.VolumeInfo.PageCount ?? -1;
                 book.ISBNs = volume.VolumeInfo.IndustryIdentifiers.Select(x => x.Identifier).ToList();
