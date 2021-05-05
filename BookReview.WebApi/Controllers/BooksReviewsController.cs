@@ -26,7 +26,10 @@ namespace BookReview.WebApi.Controllers
                 });
             }
 
-            return Ok(bookReviews);
+            return Ok(new
+            {
+                BookReviews = bookReviews
+            });
         }
     }
 }
