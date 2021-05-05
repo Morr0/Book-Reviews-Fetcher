@@ -11,7 +11,7 @@ namespace BookReview.WebApi.Controllers
     public class BooksReviewsController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Get([FromServices] IConfiguration configuration, [FromBody] GetBookReviewsRequest request)
+        public async Task<IActionResult> Get([FromServices] IConfiguration configuration, [FromQuery] GetBookReviewsRequest request)
         {
             string googleApiKey = configuration.GetSection("GoogleApiKey").Value;
 
