@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.App", "BookReview.App\BookReview.App.csproj", "{4A6A3E4C-2C6E-4E5A-9BB4-C1F2286CC294}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReview.WebApi", "BookReview.WebApi\BookReview.WebApi.csproj", "{5AADF7F9-3F57-4516-A463-C78B119AD3FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4A6A3E4C-2C6E-4E5A-9BB4-C1F2286CC294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A6A3E4C-2C6E-4E5A-9BB4-C1F2286CC294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A6A3E4C-2C6E-4E5A-9BB4-C1F2286CC294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AADF7F9-3F57-4516-A463-C78B119AD3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AADF7F9-3F57-4516-A463-C78B119AD3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AADF7F9-3F57-4516-A463-C78B119AD3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AADF7F9-3F57-4516-A463-C78B119AD3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
